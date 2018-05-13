@@ -1,0 +1,64 @@
+{
+  "author": "ValentinHacker <alternativexxxy@gmail.com> (https://github.com/ValentinHacker)",
+  "contributors": [],
+  "files": [
+    "*"
+  ],
+  "bin": {},
+  "name": "vale",
+  "version": "1.0.0",
+  "description": "A bot for Discord.",
+  "main": "vale.js",
+  "keywords": [
+    "vale",
+    "ValentinHacker"
+  ],
+  "license": "ISC",
+  "scripts": {
+    "test": "cd test && node index.js",
+    "start": "node vale.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ValentinHacker/Vale#2.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ValentinHacker/Vale#2/issues",
+    "email": "alternativexxxy@gmail.com"
+  },
+  "homepage": "https://github.com/ValentinHacker/Vale#2",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "console-extra": "^1.0.8",
+    "discord.js": "^11.3.2",
+    "fs-extra": "^6.0.0",
+    "libsodium-wrappers": "^0.7.3",
+    "opusscript": "0.0.6",
+    "strip-ansi": "^4.0.0",
+    "uws": "^9.148.0"
+  },
+  "devDependencies": {},
+  "peerDependencies": {},
+  "optionalDependencies": {},
+  "config": {},
+  "engines": {
+    "node": ">=7.0",
+    "npm": "~3.10"
+  },
+  "os": [
+    "linux",
+    "android"
+  ],
+  "cpu": [],
+  "directories": {
+    "test": "./test",
+    "bin": "./bin",
+    "lib": "./lib"
+  },
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "creationDate": "2018-05-08T08:47:38.478Z",
+  "upDate": "2018-05-08T08:47:38.478Z"
+}

@@ -1,0 +1,40 @@
+{
+  "client": {
+    "disableEveryone": true,
+    "apiRequestMethod": "burst",
+    "messageCacheLifetime": 10,
+    "messageSweepInterval": 20,
+    "shardId": 0,
+    "shardCount": 0,
+    "messageCacheMaxSize": 100,
+    "fetchAllMembers": false,
+    "sync": false,
+    "restWsBridgeTimeout": 4000,
+    "disabledEvents": [],
+    "restTimeOffset": 500,
+    "ws": {
+      "large_threshold": 100,
+      "compress": true,
+      "properties": {
+        "$os": "android",
+        "$browser": "discord.js",
+        "$device": "discord.js",
+        "$referrer": "",
+        "$referring_domain": ""
+      },
+      "version": 6
+    },
+    "http": {
+      "version": 7,
+      "host": "https://discordapp.com",
+      "cdn": "https://cdn.discordapp.com"
+    }
+  },
+  "prefix": "!!?",
+  "hook": "443442195194839060",
+  "admins": [
+    "266915298664382464"
+  ],
+  "joiner": "%s",
+  "splitter": " "
+}
