@@ -1,4 +1,6 @@
-const parent = module.parent.exports;
+const parent = module.parent.exports,
+bot = parent.bot,
+client = parent.client;
 
 exports.com = new RegExp('^' + parent.bot.prefix + 'info?( .+)?$', 'i');
 exports.name = 'Info';
@@ -10,8 +12,8 @@ exports.description = `User info.`;
 exports.command = async function(msg, comm) {
 	const message = new parent.Discord.RichEmbed();
 	if (!comm[0][1]) {
-		var app = await parent.client.fetchApplication();
-		message.setAuthor(parent.client.admin.username, parent.client.admin.displayAvatarURL, 'https://github.com/ValentinHacker')
+		var app = await client.fetchApplication();
+		message.setAuthor(client.admin.username, client.admin.displayAvatarURL, 'https://github.com/ValentinHacker')
 		.setColor('RANDOM')
 		.setDescription(`${app.name} is a bot developed by ${parent.client.admin.tag}.`)
 		.setImage('https://cdn.discordapp.com/icons/443340924605693952/3ca51c3a354b3efa7657bc04516ca3a2.jpg')
@@ -48,7 +50,7 @@ exports.command = async function(msg, comm) {
 				if (inv.array.length) {
 					message.setURL(inv.first().url);
 				}
-			} catch(err) { }
+			} catch(ENOACCES) { }
 		} else {
 			message.addField('Members Count', target.recipients.array().length + '');
 		}
@@ -76,11 +78,13 @@ exports.command = async function(msg, comm) {
 					}
 				});
 			} else if (msg.channel.recipient) {
-				user = comm[0][1] == parent.client.user.username ? parent.client.user : msg.channel.recipient;
+				user = comm[0][1] == client.user.username ? parent.client.user : msg.channel.recipient;
 			}
 		}
 		
 		//user = user ? user : (msg.guild ? msg.guild.members.get(msg.author.id) : msg.author);
+		//Error instead of guess!
+		
 		if (user) {
 			user.presence.game = user.presence.game || {};
 		
