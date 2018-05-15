@@ -78,6 +78,11 @@ const init = exports.init = async function init() {
 			}).filter(i => i).forEach(emoji => msg.mentions.emojis.set(emoji.id, emoji));
 		}
 		
+		if (msg.guild) {
+			msg.channel.recipients = msg.channel.recipients || new parent.Discord.Collection();
+			msg.channel.members.map(mmb => mmb.user).forEach(usr => msg.channel.recipients.set(usr.id, usr));
+		}
+		
 		trig.forEach(async com => {
 			try {
 				await com.command(msg, comm);
