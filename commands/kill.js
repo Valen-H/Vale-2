@@ -1,4 +1,6 @@
-const parent = module.parent.exports;
+const parent = module.parent.exports,
+bot = parent.bot,
+client = parent.client;
 
 exports.com = new RegExp('^' + parent.bot.prefix + 'kill$', 'i');
 exports.name = 'Kill';
@@ -14,7 +16,7 @@ exports.command = async function(msg) {
 		} catch(err) {
 			await msg.author.send('*Shuting down...*');
 		}
-		parent.client.user.setPresence({
+		await parent.client.user.setPresence({
 			status: 'offline',
 			afk: true,
 			game: {
@@ -22,7 +24,7 @@ exports.command = async function(msg) {
 				type: 'STREAMING'
 			}
 		});
-		parent.client.destroy();
+		await parent.client.destroy();
 	} else {
 		try {
 			await msg.reply('This is an owner-only command.');
