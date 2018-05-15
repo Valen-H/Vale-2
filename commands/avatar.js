@@ -1,5 +1,6 @@
 const parent = module.parent.exports,
-client = parent.client;
+client = parent.client,
+bot = parent.bot;
 
 exports.com = new RegExp('^' + parent.bot.prefix + 'ava(tar)?( .+)?$', 'i');
 exports.name = 'Avatar';
@@ -25,7 +26,6 @@ exports.command = async function(msg, comm) {
 			}
 		}
 		if (msg.channel.recipients && !user) { 
-			// .recipients is only for group dm channel and how can a bot be in a group dm channel
 			user = msg.channel.recipients.find(mmb => {
 				var param = comm[1] ? comm.last().param([1, 'x', 1])[2] : (/^[0-9]+$/.test(comm.last().param([1, 'x', 1])[1]) ? 'id' : (/#[0-9]{3,5}$/.test(comm.last().param([1, 'x', 1])[1]) ? 'tag' : 'username'));
 				if ((new RegExp(comm[1] ? comm.last().param([1, 'x', 1])[1] : comm[0][1], 'i')).test(mmb[param])) {
@@ -42,7 +42,8 @@ exports.command = async function(msg, comm) {
 		user.displayAvatarURL = user.iconURL;
 	}
 	
-	user = user ? (user.user || user) : user;
+	user = user /*null, let null*/ ? (user.user || user) /*member, cast to user*/ : user /*user, let user*/;
+	
 	if (user && user.displayAvatarURL) {
 		try {
 			await msg.reply(user.displayAvatarURL);
