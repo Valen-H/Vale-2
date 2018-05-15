@@ -1,4 +1,6 @@
-const parent = module.parent.exports;
+const parent = module.parent.exports,
+client = parent.client,
+bot = parent.bot;
 
 exports.com = new RegExp('^' + parent.bot.prefix + 'col(or)?( .+)?$', 'i');
 exports.name = 'Color';
@@ -8,7 +10,7 @@ exports.category = 'Utility';
 exports.description = `Color info.`;
 
 exports.command = async function(msg, comm) {
-	var message = new parent.Discord.RichEmbed();
+	const message = new parent.Discord.RichEmbed();
 	message.setColor((comm.last()[1] || 'RANDOM').toUpperCase())
 	.setTitle(message.color);
 	try {

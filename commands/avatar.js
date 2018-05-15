@@ -1,5 +1,6 @@
 const parent = module.parent.exports,
-client = parent.client;
+client = parent.client,
+bot = parent.bot;
 
 exports.com = new RegExp('^' + parent.bot.prefix + 'ava(tar)?( .+)?$', 'i');
 exports.name = 'Avatar';
@@ -9,10 +10,10 @@ exports.category = 'Utility';
 exports.description = `Fetch user avatar.`;
 
 exports.command = async function(msg, comm) {
-	var user = msg.author;
-	if (msg.mentions && msg.mentions.users && msg.mentions.users.array().length) {
+	let user = msg.author;
+	if (msg.mentions.users.size) {
 		user = msg.mentions.users.first();
-	} else if (comm[0][1] && msg.channel) {
+	} else if (comm[0][1]) {
 		if (msg.channel.members) {
 			user = msg.channel.members.find(comm[1] ? comm.last().param([1, 'x', 1])[2] : 'displayName', comm[1] ? comm.last().param([1, 'x', 1])[1] : comm[0][1]);
 			if (!user) {
@@ -24,7 +25,7 @@ exports.command = async function(msg, comm) {
 				});
 			}
 		}
-		if (msg.channel.recipients && !user) {
+		if (msg.channel.recipients && !user) { 
 			user = msg.channel.recipients.find(mmb => {
 				var param = comm[1] ? comm.last().param([1, 'x', 1])[2] : (/^[0-9]+$/.test(comm.last().param([1, 'x', 1])[1]) ? 'id' : (/#[0-9]{3,5}$/.test(comm.last().param([1, 'x', 1])[1]) ? 'tag' : 'username'));
 				if ((new RegExp(comm[1] ? comm.last().param([1, 'x', 1])[1] : comm[0][1], 'i')).test(mmb[param])) {
@@ -41,7 +42,8 @@ exports.command = async function(msg, comm) {
 		user.displayAvatarURL = user.iconURL;
 	}
 	
-	user = user ? (user.user || user) : user;
+	user = user /*null, let null*/ ? (user.user || user) /*member, cast to user*/ : user /*user, let user*/;
+	
 	if (user && user.displayAvatarURL) {
 		try {
 			await msg.reply(user.displayAvatarURL);

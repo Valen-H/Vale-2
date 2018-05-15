@@ -1,4 +1,6 @@
-const parent = module.parent.exports;
+const parent = module.parent.exports,
+bot = parent.bot,
+client = parent.client;
 
 exports.com = new RegExp('^' + parent.bot.prefix + 'kill$', 'i');
 exports.name = 'Kill';
