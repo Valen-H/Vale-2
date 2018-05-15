@@ -14,9 +14,9 @@ exports.command = async function(msg, comm) {
 	cmp = [];
 	
 	cnt.forEach(it => {
-		if (/[a-zA-Z]/i.test(it)) {
+		if (/^[a-zA-Z]$/i.test(it)) {
 			cmp.push(`:regional_indicator_${it}:`);
-		} else if (/\d/i.test(it)) {
+		} else if (/^\d$/i.test(it)) {
 			cmp.push(`${it}⃣`);
 		} else if (it == '!') {
 			cmp.push(':exclamation:');
