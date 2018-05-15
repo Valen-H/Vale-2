@@ -1,5 +1,6 @@
 const parent = module.parent.exports,
-client = parent.client;
+client = parent.client,
+bot = parent.bot;
 
 exports.com = new RegExp('^' + parent.bot.prefix + '(prune|purge) ?\\d*$', 'i');
 exports.name = 'Prune/Purge';
@@ -9,7 +10,7 @@ exports.category = 'Moderation';
 exports.description = `Delete a number of messages in current channel (Requires MANAGE_MESSAGES permission).`;
 
 exports.command = async function(msg, comm) {
-	var def = msg.channel instanceof parent.Discord.TextChannel ? 1 : 50;
+	const def = msg.channel instanceof parent.Discord.TextChannel ? 1 : 50;
 	if (msg.guild && msg.channel && msg.guild.members.get(client.user.id)) {
 		if (msg.channel.permissionsFor(msg.author).has('MANAGE_MESSAGES') && msg.channel.permissionsFor(client.user).has('MANAGE_MESSAGES')) {
 			var msgs = (await msg.channel.fetchMessages({limit: (comm[0][1] || def) | 0, before: msg.id})).array().filter(ms => ms.deletable);
