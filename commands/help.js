@@ -9,7 +9,7 @@ exports.category = 'Miscellaneous';
 exports.description = `Help page.`;
 
 exports.command = async function(msg, comm) {
-	var message = '```Examples:\n!id user\n!id "user name"\n\nSyntax:\n[abc] - optional\n(grp1|grp2) - grouping (one or other)\n<Object> - datatype\n',
+	let message = '```Examples:\n!id user\n!id "user name"\n\nSyntax:\n[abc] - optional\n(grp1|grp2) - grouping (one or other)\n<Object> - datatype\n',
 	categories = { };
 	
 	if (comm[0][1]) {

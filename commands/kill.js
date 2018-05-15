@@ -14,7 +14,7 @@ exports.command = async function(msg) {
 		} catch(err) {
 			await msg.author.send('*Shuting down...*');
 		}
-		await parent.client.user.setPresence({
+		parent.client.user.setPresence({
 			status: 'offline',
 			afk: true,
 			game: {
@@ -22,7 +22,7 @@ exports.command = async function(msg) {
 				type: 'STREAMING'
 			}
 		});
-		await parent.client.destroy();
+		parent.client.destroy();
 	} else {
 		try {
 			await msg.reply('This is an owner-only command.');

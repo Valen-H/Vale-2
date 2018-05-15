@@ -8,7 +8,7 @@ exports.category = 'Miscellaneous';
 exports.description = `User info.`;
 
 exports.command = async function(msg, comm) {
-	var message = new parent.Discord.RichEmbed();
+	const message = new parent.Discord.RichEmbed();
 	if (!comm[0][1]) {
 		var app = await parent.client.fetchApplication();
 		message.setAuthor(parent.client.admin.username, parent.client.admin.displayAvatarURL, 'https://github.com/ValentinHacker')

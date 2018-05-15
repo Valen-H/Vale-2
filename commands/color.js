@@ -7,17 +7,11 @@ exports.level = 'User';
 exports.category = 'Utility';
 exports.description = `Color info.`;
 
-exports.command = async function(msg, comm) {
-	var message = new parent.Discord.RichEmbed();
+exports.command = function(msg, comm) {
+	const message = new parent.Discord.RichEmbed();
 	message.setColor((comm.last()[1] || 'RANDOM').toUpperCase())
 	.setTitle(message.color);
-	try {
-		await msg.reply((comm.last()[1] || 'RANDOM').toUpperCase(), {
+	msg.reply((comm.last()[1] || 'RANDOM').toUpperCase(), {
 			embed: message
-		});
-	} catch(err) {
-		await msg.author.send((comm.last()[1] || 'RANDOM').toUpperCase(), {
-			embed: message
-		});
-	}
+	});
 };
