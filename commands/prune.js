@@ -1,5 +1,6 @@
 const parent = module.parent.exports,
-client = parent.client;
+client = parent.client,
+bot = parent.bot;
 
 exports.com = new RegExp('^' + parent.bot.prefix + '(prune|purge) ?\\d*$', 'i');
 exports.name = 'Prune/Purge';
