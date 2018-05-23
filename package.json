@@ -6,7 +6,7 @@
   ],
   "bin": {},
   "name": "vale",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A bot for Discord.",
   "main": "vale.js",
   "keywords": [
@@ -16,7 +16,7 @@
   "license": "ISC",
   "scripts": {
     "test": "cd test && node index.js",
-    "start": "node vale.js"
+    "start": "node vale.js --no-deprecation || cat npm-debug.log"
   },
   "repository": {
     "type": "git",
@@ -35,7 +35,8 @@
     "libsodium-wrappers": "^0.7.3",
     "opusscript": "0.0.6",
     "strip-ansi": "^4.0.0",
-    "uws": "^9.148.0"
+    "uws": "^9.148.0",
+    "wordnet": "^0.1.2"
   },
   "devDependencies": {},
   "peerDependencies": {},

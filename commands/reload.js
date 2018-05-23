@@ -13,7 +13,6 @@ exports.command = async function(msg) {
 	if (!parent.bot.admins.includes(msg.author.id)) return;
 	parent.commands = [];
 	msg.delete().catch(() => msg.reply('Done.'));
-	// replies "done" if the message fails to delete... might as well just reply done
 	if (msg.content.includes('s')) {
 		await parent.init();
 	} else {
