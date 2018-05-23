@@ -30,10 +30,10 @@
       "cdn": "https://cdn.discordapp.com"
     }
   },
-  "prefix": "!!?",
-  "hook": "443442195194839060",
+  "prefix": "!",
+  "hook": "add log webhook id here or leave blank",
   "admins": [
-    "266915298664382464"
+    "add your own id here"
   ],
   "joiner": "%s",
   "splitter": " "
