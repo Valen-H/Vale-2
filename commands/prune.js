@@ -2,6 +2,8 @@ const parent = module.parent.exports,
 client = parent.client,
 bot = parent.bot;
 
+module.exports = exports = new parent.Command();
+
 exports.com = new RegExp('^' + parent.bot.prefix + '(prune|purge) ?\\d*$', 'i');
 exports.name = 'Prune/Purge';
 exports.usage = parent.bot.prefix + '(prune|purge)[ messages<Number>=1]';

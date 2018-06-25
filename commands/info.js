@@ -2,6 +2,8 @@ const parent = module.parent.exports,
 bot = parent.bot,
 client = parent.client;
 
+module.exports = exports = new parent.Command();
+
 exports.com = new RegExp('^' + parent.bot.prefix + 'info?( .+)?$', 'i');
 exports.name = 'Info';
 exports.usage = parent.bot.prefix + 'inf[o][ user<String>]';
@@ -13,9 +15,9 @@ exports.command = async function(msg, comm) {
 	const message = new parent.Discord.RichEmbed();
 	if (!comm[0][1]) {
 		var app = await client.fetchApplication();
-		message.setAuthor(client.admin.username, client.admin.displayAvatarURL, 'https://github.com/ValentinHacker')
+		message.setAuthor(app.owner.username, app.owner.displayAvatarURL, 'https://github.com/ValentinHacker')
 		.setColor('RANDOM')
-		.setDescription(`${app.name} is a bot developed by ${parent.client.admin.tag}.`)
+		.setDescription(`${app.name} is a bot owned by ${parent.client.admin.tag}.`)
 		.setImage('https://cdn.discordapp.com/icons/443340924605693952/3ca51c3a354b3efa7657bc04516ca3a2.jpg')
 		.setFooter(app.description, 'https://cdn.discordapp.com/icons/443340924605693952/3ca51c3a354b3efa7657bc04516ca3a2.jpg')
 		.setTitle('Info')

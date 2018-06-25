@@ -2,23 +2,36 @@ const parent = module.parent.exports,
 chalk = parent.chalk,
 fs = parent.fs;
 
-Object.assign(exports, parent);
+Object.assign(exports, parent); //NO STRICT!!
 
-var bot = exports.bot = parent.bot = JSON.parse(fs.readFileSync('./config.json') || '{"prefix": "!"}');
+var bot = exports.bot = parent.bot = JSON.parse(fs.readFileSync('./config.json') || '{"prefix": "!"}'),
+commands = { };
 
 const init = exports.init = async function init() {
 	
 	if (exports.client) await exports.client.destroy();
 	
-	bot = exports.bot = parent.bot = JSON.parse((await fs.readFile('./config.json')) || '{"prefix": "!"}'),
-	commands = exports.commands = parent.commands = [];
+	bot = exports.bot = parent.bot = JSON.parse((await fs.readFile('./config.json')) || '{"prefix": "!"}');
+	commands = exports.commands = parent.commands = [ ];
 	const client = parent.client = exports.client = new parent.Discord.Client(bot.client);
 	parent.reload();
+	client.bot = bot;
 	defaults();
+	parent.save();
 	
-	client.on('message', msg => {
+	client.on('message', async msg => {
 		
-		if (msg.author.bot) return;
+		if (msg.author.bot) {
+			if (msg.content && msg.content.equals(parent.prefix + 'mock.+') && msg.author.id == client.user.id) {
+				msg.content = msg.content.split(' ').slice(1).join(' ');
+				msg.delete(1000);
+			} else {
+				return;
+			}
+		}
+		if (bot.admins.includes(msg.author.id)) {
+			msg.content = msg.content.replace(/\$\{((.|\n)+?)\}/gim, (m, ...p) => eval(p.shift()));
+		}
 		
 		msg.content = msg.content ? msg.content : '';
 		msg.content = msg.content.replace(/@me/g, '"' + msg.author.username + '"');
@@ -29,7 +42,7 @@ const init = exports.init = async function init() {
 		nar = [ ],
 		pass = 0;
 		
-		split.forEach(it => {
+		await chillout.forEach(split, it => {
 			if (pass <= 0) {
 				nar.push(it.replace(/(^"|"$)/g, ''));
 			} else {
@@ -45,7 +58,7 @@ const init = exports.init = async function init() {
 			}
 		});
 		
-		nar.forEach((it, ind, arr) => {
+		await chillout.forEach(nar, (it, ind, arr) => {
 			comm.push([]);
 			arr.forEach((i, indd) => {
 				if (indd <= ind) {
@@ -66,7 +79,7 @@ const init = exports.init = async function init() {
 		
 		if (msg.mentions) {
 			msg.mentions.emojis = new parent.Discord.Collection();
-			(msg.content.match(/<:.+?:\d+?>/g) || []).map(emoji => {
+			await chillout.forEach((msg.content.match(/<:.+?:\d+?>/g) || []).map(emoji => {
 				return client.emojis.find('name', emoji.replace(/(^<:|:\d*?>$)/g, '')) ||
 				new parent.Discord.Emoji(msg.guild || (new parent.Discord.Guild(client)), {
 					id: emoji.replace(/(^<:.+?:|>$)/g, ''),
@@ -75,15 +88,15 @@ const init = exports.init = async function init() {
 					managed: false,
 					roles: [ ]
 				});
-			}).filter(i => i).forEach(emoji => msg.mentions.emojis.set(emoji.id, emoji));
+			}).filter(i => i), emoji => msg.mentions.emojis.set(emoji.id, emoji));
 		}
 		
 		if (msg.guild) {
 			msg.channel.recipients = msg.channel.recipients || new parent.Discord.Collection();
-			msg.channel.members.map(mmb => mmb.user).forEach(usr => msg.channel.recipients.set(usr.id, usr));
+			await chillout.forEach(msg.channel.members.map(mmb => mmb.user), usr => msg.channel.recipients.set(usr.id, usr));
 		}
 		
-		trig.forEach(async com => {
+		await chillout.forEach(trig, async com => {
 			try {
 				await com.command(msg, comm);
 			} catch(err) {
@@ -92,20 +105,20 @@ const init = exports.init = async function init() {
 		});
 	});
 	
-	client.on('disconnect', () => {
-		console.log(chalk.yellow.dim('Disconnected'), chalk.gray(new Date()));
+	client.once('disconnect', () => {
+		console.log(chalk.yellow.dim('Disconnected'), chalk.gray(Date()));
 	});
 	
 	return new Promise((rsl, rjc) => {
-		client.on('ready', async () => {
+		client.once('ready', async () => {
 			if (bot.hook) client.vale = await client.fetchWebhook(bot.hook);
-			console.info(`Logged in as ${chalk.green(client.user.tag)}`);
+			console.info(`Logged in as ${chalk.green(client.user.tag)}\nListening to '${bot.prefix}'`);
 			client.user.setPresence({
 				status: 'online',
 				afk: false,
 				game: {
 					name: bot.prefix + 'help',
-					type: 'STREAMING'
+					type: 'LISTENING'
 				},
 				since: new Date()
 			});
@@ -113,38 +126,11 @@ const init = exports.init = async function init() {
 			rsl();
 		});
 		
-		client.login((fs.readFileSync('.token') || 'null').toString() || bot.token || 'null');
+		client.login((process.env.tkn || fs.readFileSync('.token') || 'null').toString() || bot.token || 'null');
 	});
 },
 defaults = parent.defaults = exports.defaults = function defaults() {
-	var tmp = {
-		"client": {
-			"disableEveryone": true,
-			"apiRequestMethod": "burst",
-			"messageCacheLifetime": 10,
-			"messageSweepInterval": 20,
-			"shardId": 0,
-			"shardCount": 0,
-			"messageCacheMaxSize": 100,
-			"fetchAllMembers": false,
-			"sync": false,
-			"restWsBridgeTimeout": 4000,
-			"disabledEvents": [ ],
-			"restTimeOffset": 500,
-		},
-		"prefix": "!",
-		"hook": "",
-		"admins": [
-			"266915298664382464"
-		],
-		"joiner": "%s",
-		"splitter": " "
-	};
+	var tmp = JSON.parse(fs.readFileSync('./.pre/config.json') || '{"prefix": "!"}');
 	Object.assign(tmp, bot);
 	return Object.assign(bot, tmp);
 };
-
-if (bot.watch !== false) fs.watch('./commands', {
-	recursive: true,
-	persistent: false
-}, parent.reload);

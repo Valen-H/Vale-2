@@ -2,6 +2,8 @@ const parent = module.parent.exports,
 bot = parent.bot,
 client = parent.client;
 
+module.exports = exports = new parent.Command();
+
 exports.com = new RegExp('^' + parent.bot.prefix + 'he?lp( .+)?$', 'i');
 exports.name = 'Help';
 exports.usage = parent.bot.prefix + 'h[e]lp[ command<String>]';
@@ -14,16 +16,15 @@ exports.command = async function(msg, comm) {
 	categories = { };
 	
 	if (comm[0][1]) {
-		for (let com of parent.commands.sort().filter(com => new RegExp(comm[0][1], 'i').test(com.name)).filter(com => !com.hidden)) {
-			message = '```' + `Category: ${com.category}\nLevel: ${com.level}\nName: ${com.name}\nDescription: ${com.description}\nUsage: ${com.usage}\nPattern: ${com.com}` + '```';
+		return await chillout.forOf(parent.commands.sort().filter(com => ['name', 'category', 'level'].some(som => new RegExp(comm[0][1], 'i').test(com[som]))).filter(com => !com.hidden), com => {
+			message = '```js\n' + `Category: ${com.category}\nLevel: ${com.level}\nName: ${com.name}\nDescription: ${com.description}\nUsage: ${com.usage}\nPattern: ${com.com}` + '```';
 			msg.channel.send(message, {
 				split: true
-			}).catch(parent.ign);
-		}
-		return;
+			}).catch(parent.ignore);
+		}, this);
 	}
 	
-	parent.commands.sort().filter(com => !com.hidden).forEach(command => {
+	await chillout.forEach(parent.commands.sort().filter(com => !com.hidden), command => {
 		categories[command.category || 'Uncategorised'] = categories[command.category || 'Uncategorised'] || [ ];
 		categories[command.category || 'Uncategorised'].push(command);
 	});
@@ -31,8 +32,8 @@ exports.command = async function(msg, comm) {
 	for (let cat in categories) {
 		message += '\n' + cat + ':\n';
 		cat = categories[cat].sort();
-		cat.forEach(comm => {
-			message += `${comm.level} - ${comm.name} -> ${comm.description}\n\t${comm.usage}\n`;
+		await chillout.forEach(cat, comm => {
+			message += `- ${comm.name}\n${comm.description}\n\t${comm.usage}\n`;
 		});
 	}
 	

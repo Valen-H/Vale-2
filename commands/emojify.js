@@ -2,6 +2,8 @@ const parent = module.parent.exports,
 bot = parent.bot,
 client = parent.client;
 
+module.exports = exports = new parent.Command();
+
 exports.com = new RegExp('^' + parent.bot.prefix + 'em(oji)?fy? .+$', 'i');
 exports.name = 'Emojify';
 exports.usage = parent.bot.prefix + 'em[oji]f[y][ text<String>]';
@@ -13,7 +15,7 @@ exports.command = async function(msg, comm) {
 	var cnt = comm[0][1].split('').map(it => it.toLowerCase()),
 	cmp = [];
 	
-	cnt.forEach(it => {
+	await chillout.forEach(cnt, it => {
 		if (/^[a-zA-Z]$/i.test(it)) {
 			cmp.push(`:regional_indicator_${it}:`);
 		} else if (/^\d$/i.test(it)) {

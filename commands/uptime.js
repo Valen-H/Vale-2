@@ -2,6 +2,8 @@ const parent = module.parent.exports,
 bot = parent.bot,
 client = parent.client;
 
+module.exports = exports = new parent.Command();
+
 exports.com = new RegExp('^' + parent.bot.prefix + 'up(time)?$', 'i');
 exports.name = 'Uptime';
 exports.usage = parent.bot.prefix + 'up[time]';

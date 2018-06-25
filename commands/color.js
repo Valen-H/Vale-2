@@ -2,6 +2,8 @@ const parent = module.parent.exports,
 client = parent.client,
 bot = parent.bot;
 
+module.exports = exports = new parent.Command();
+
 exports.com = new RegExp('^' + parent.bot.prefix + 'col(or)?( .+)?$', 'i');
 exports.name = 'Color';
 exports.usage = parent.bot.prefix + 'col[or][ code<String>]';
