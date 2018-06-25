@@ -5,22 +5,24 @@
     "*"
   ],
   "bin": {},
-  "name": "vale",
-  "version": "1.0.1",
+  "name": "vale2",
+  "version": "1.0.3-0",
   "description": "A bot for Discord.",
   "main": "vale.js",
   "keywords": [
     "vale",
-    "ValentinHacker"
+    "ValentinHacker",
+    "node"
   ],
   "license": "ISC",
   "scripts": {
-    "test": "cd test && node index.js",
-    "start": "node vale.js --no-deprecation || cat npm-debug.log"
+    "test": "(npm start | echo) || cat npm-debug.log",
+    "start": "node vale.js --no-deprecation || npm start",
+    "stop": "touch .stop ; exit"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ValentinHacker/Vale#2.git"
+    "url": "git+https://github.com/ValentinHacker/Vale.git#2.git"
   },
   "bugs": {
     "url": "https://github.com/ValentinHacker/Vale#2/issues",
@@ -29,18 +31,23 @@
   "homepage": "https://github.com/ValentinHacker/Vale#2",
   "dependencies": {
     "chalk": "^2.4.1",
+    "chillout-es7": "^3.1.7",
     "console-extra": "^1.0.8",
     "discord.js": "^11.3.2",
     "fs-extra": "^6.0.0",
+    "http2": "^3.3.7",
     "libsodium-wrappers": "^0.7.3",
     "opusscript": "0.0.6",
     "strip-ansi": "^4.0.0",
-    "uws": "^9.148.0",
-    "wordnet": "^0.1.2"
+    "uws": "^9.148.0"
   },
   "devDependencies": {},
   "peerDependencies": {},
-  "optionalDependencies": {},
+  "optionalDependencies": {
+    "translate": "^1.0.2",
+    "wordnet": "^0.1.2",
+    "yahoo-weather": "^2.2.2"
+  },
   "config": {},
   "engines": {
     "node": ">=7.0",
@@ -61,5 +68,8 @@
     "access": "public"
   },
   "creationDate": "2018-05-08T08:47:38.478Z",
-  "upDate": "2018-05-08T08:47:38.478Z"
+  "upDate": "Mon Jun 25 2018 20:52:35 GMT+0300 (EEST)",
+  "browser": false,
+  "preferGlobal": false,
+  "arch": []
 }

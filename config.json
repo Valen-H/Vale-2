@@ -3,13 +3,13 @@
     "disableEveryone": true,
     "apiRequestMethod": "burst",
     "messageCacheLifetime": 10,
-    "messageSweepInterval": 20,
+    "messageSweepInterval": 25,
     "shardId": 0,
     "shardCount": 0,
-    "messageCacheMaxSize": 100,
+    "messageCacheMaxSize": 50,
     "fetchAllMembers": false,
     "sync": false,
-    "restWsBridgeTimeout": 4000,
+    "restWsBridgeTimeout": 3000,
     "disabledEvents": [],
     "restTimeOffset": 500,
     "ws": {
@@ -30,11 +30,16 @@
       "cdn": "https://cdn.discordapp.com"
     }
   },
-  "prefix": "!",
-  "hook": "add log webhook id here or leave blank",
+  "prefix": "!!?",
+  "hook": "443442195194839060",
   "admins": [
-    "add your own id here"
+    "266915298664382464"
   ],
   "joiner": "%s",
-  "splitter": " "
+  "splitter": " ",
+  "fetch": "",
+  "mock": "458347053861568562",
+  "key": "trnsl.1.1.20180607T133444Z.4646b492ee34fb3b.da21c651d4326e3580a6c075fb02f5ce262d3a27",
+  "asyncs": 1000,
+  "balance": 250
 }
