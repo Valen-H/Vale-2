@@ -1,9 +1,12 @@
 const parent = module.parent.exports,
-bot = parent.bot;
+bot = parent.bot,
+client = parent.client;
 
-exports.com = new RegExp('^' + parent.bot.prefix + 'save?$', 'i');
+module.exports = exports = new parent.Command();
+
+exports.com = new RegExp('^' + bot.prefix + 'save?$', 'i');
 exports.name = 'Save';
-exports.usage = parent.bot.prefix + 'sav[e]';
+exports.usage = bot.prefix + 'sav[e]';
 exports.level = 'Owner';
 exports.category = 'Bot';
 exports.description = `Save data files.`;

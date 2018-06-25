@@ -1,17 +1,19 @@
-const parent = module.parent.exports;
+const parent = module.parent.exports,
+client = parent.client,
+bot = parent.bot;
 
-exports.com = new RegExp('^' + parent.bot.prefix + '(rel(oad)?|res(tart)?)$', 'i');
+module.exports = exports = new parent.Command();
+
+exports.com = new RegExp('^' + bot.prefix + '(rel(oad)?|res(tart)?)$', 'i');
 exports.name = 'Reload/Restart';
-exports.usage = parent.bot.prefix + '(rel[oad]|res[tart])';
+exports.usage = bot.prefix + '(rel[oad]|res[tart])';
 exports.level = 'Owner';
 exports.category = 'Bot';
 exports.description = `Reload/Restart bot.`;
 
-Object.assign(exports, parent);
-
 exports.command = async function(msg) {
-	if (!parent.bot.admins.includes(msg.author.id)) return;
-	parent.commands = [];
+	if (!bot.admins.includes(msg.author.id)) return;
+	parent.commands = [ ];
 	msg.delete().catch(() => msg.reply('Done.'));
 	if (msg.content.includes('s')) {
 		await parent.init();
