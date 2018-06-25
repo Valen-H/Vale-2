@@ -2,6 +2,8 @@ const parent = module.parent.exports,
 client = parent.client,
 bot = parent.bot;
 
+module.exports = exports = new parent.Command();
+
 exports.com = new RegExp('^' + parent.bot.prefix + 'ava(tar)?( .+)?$', 'i');
 exports.name = 'Avatar';
 exports.usage = parent.bot.prefix + 'ava[tar][ user<String>=msg.author[ trait<String>=(displayName|username|id)]]';
