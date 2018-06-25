@@ -2,29 +2,31 @@ const parent = module.parent.exports,
 bot = parent.bot,
 client = parent.client;
 
-exports.com = new RegExp('^' + parent.bot.prefix + 'kill$', 'i');
+module.exports = exports = new parent.Command();
+
+exports.com = new RegExp('^' + bot.prefix + 'kill$', 'i');
 exports.name = 'Kill';
-exports.usage = parent.bot.prefix + 'kill';
+exports.usage = bot.prefix + 'kill';
 exports.level = 'Owner';
 exports.category = 'Bot';
 exports.description = `Kill bot.`;
 
 exports.command = async function(msg) {
-	if (parent.bot.admins.includes(msg.author.id)) {
+	if (bot.admins.includes(msg.author.id)) {
 		try {
 			await msg.channel.send('*Shuting down...*');
 		} catch(err) {
 			await msg.author.send('*Shuting down...*');
 		}
-		await parent.client.user.setPresence({
+		await client.user.setPresence({
 			status: 'offline',
 			afk: true,
 			game: {
-				name: parent.bot.prefix + 'help',
+				name: bot.prefix + 'help',
 				type: 'STREAMING'
 			}
 		});
-		await parent.client.destroy();
+		await client.destroy();
 	} else {
 		try {
 			await msg.reply('This is an owner-only command.');

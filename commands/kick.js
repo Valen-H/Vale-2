@@ -2,12 +2,14 @@ const parent = module.parent.exports,
 client = parent.client,
 bot = parent.bot;
 
-exports.com = new RegExp('^' + parent.bot.prefix + '(kick|ban) .+?( .+)?$', 'i');
+module.exports = exports = new parent.Command();
+
+exports.com = new RegExp('^' + bot.prefix + '(kick|ban) .+?( .+)?$', 'i');
 exports.name = 'Kick/Ban';
-exports.usage = parent.bot.prefix + '(kick|ban) user[ reason<String>]';
+exports.usage = bot.prefix + '(kick|ban) user[ reason<String>]';
 exports.level = 'Admin';
 exports.category = 'Moderation';
-exports.description = `Kick/Ban member.`;
+exports.description = `Kick/Ban member (Requires BAN_MEMBERS and/or KICK_MEMBERS permissions respectively).`;
 
 exports.command = async function(msg, comm) {
 	var user = null;
