@@ -2,6 +2,8 @@ const parent = module.parent.exports,
 client = parent.client,
 bot = parent.bot;
 
+module.exports = exports = new parent.Command();
+
 var wordnet;
 
 try {
