@@ -2,9 +2,11 @@ const parent = module.parent.exports,
 bot = parent.bot,
 client = parent.client;
 
-exports.com = new RegExp('^' + parent.bot.prefix + 'whom? ?is ?(an?|the)? .+\\??$', 'i');
+module.exports = exports = new parent.Command();
+
+exports.com = new RegExp('^' + bot.prefix + 'whom? ?(tf|is|was)? ?(an?|the)? .+\\??$', 'i');
 exports.name = 'WhoIs';
-exports.usage = parent.bot.prefix + 'who[[m] ]Is[ [A[n]]] trait<String>';
+exports.usage = bot.prefix + 'who[[m] ][Is|Was|Tf][ [A[n]|The]] trait<String>';
 exports.level = 'User';
 exports.category = 'Utility';
 exports.description = `Fetch a random member.`;
